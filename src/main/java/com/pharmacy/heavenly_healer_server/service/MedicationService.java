@@ -10,7 +10,7 @@ public interface MedicationService {
     List<Medication> findAllMedication();
 
     Medication saveMedication(Medication medication);
-    Medication findByName(String name);
+    List<Medication> findByName(String name);
     Medication updateMedication(Medication medication);
     void deleteMedication(String name);
 }

@@ -31,8 +31,8 @@ public class MedicationServiceImpl implements MedicationService {
     }
 
     @Override
-    public Medication findByName(String name) {
-        return repository.findByName(name);
+    public List<Medication> findByName(String name) {
+        return repository.findByNameContainingIgnoreCase(name);
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 // Репозиторий для работы с данными в памяти, без БД. Используется для быстрого тестирования
@@ -22,8 +23,10 @@ public class InMemoryMedicationDAO {
         return medication;
     }
 
-    public Medication findByName(String name) {
-        return MEDICATIONS.stream().filter(element -> element.getName().equals(name)).findFirst().orElse(null);
+    public List<Medication> findByName(String name) {
+        return MEDICATIONS.stream()
+                .filter(element -> element.getName().equals(name))
+                .collect(Collectors.toList());
     }
 
     public Medication updateMedication(Medication medication) {

@@ -28,7 +28,7 @@ public class InMemoryMedicationServiceImpl implements MedicationService {
     }
 
     @Override
-    public Medication findByName(String name) {
+    public List<Medication> findByName(String name) {
         return repository.findByName(name);
     }
 

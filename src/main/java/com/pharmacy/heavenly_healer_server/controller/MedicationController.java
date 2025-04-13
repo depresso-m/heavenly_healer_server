@@ -31,7 +31,7 @@ public class MedicationController {
     }
 
     @GetMapping("/{name}")
-    public Medication findByName(@PathVariable String name) {
+    public List<Medication> findByName(@PathVariable String name) {
         return medicationService.findByName(name);
     }
 
