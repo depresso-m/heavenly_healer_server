@@ -1,6 +1,7 @@
 package com.pharmacy.heavenly_healer_server.service.impl;
 
 import com.pharmacy.heavenly_healer_server.model.Medication;
+import com.pharmacy.heavenly_healer_server.model.MedicationDto;
 import com.pharmacy.heavenly_healer_server.model.MedicationLiteDto;
 import com.pharmacy.heavenly_healer_server.repository.MedicationRepository;
 import com.pharmacy.heavenly_healer_server.service.MedicationService;
@@ -53,9 +54,11 @@ public class MedicationServiceImpl implements MedicationService {
         return repository.findAllByName(name);
     }
 
-    public Medication findById(Integer id) {
-        return repository.findById(id)
+    public MedicationDto findById(Integer id) {
+        Medication medication = repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Medication not found with id: " + id));
+
+        return MedicationDto.mapToDto(medication);
     }
 
     @Override
@@ -105,5 +108,10 @@ public class MedicationServiceImpl implements MedicationService {
 
         // Сохраняем медикамент в базе данных
         repository.save(medication);
+    }
+
+    @Override
+    public List<MedicationLiteDto> findByCategory(Integer category_id) {
+        return repository.findAllByCategory(category_id);
     }
 }

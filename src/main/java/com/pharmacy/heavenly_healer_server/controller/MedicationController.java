@@ -1,6 +1,7 @@
 package com.pharmacy.heavenly_healer_server.controller;
 
 import com.pharmacy.heavenly_healer_server.model.Medication;
+import com.pharmacy.heavenly_healer_server.model.MedicationDto;
 import com.pharmacy.heavenly_healer_server.model.MedicationLiteDto;
 import com.pharmacy.heavenly_healer_server.service.MedicationService;
 import org.springframework.core.io.Resource;
@@ -66,8 +67,13 @@ public class MedicationController {
         return medicationService.findByName(name);
     }
 
+    @GetMapping("/by-category/{category_id}")
+    public List<MedicationLiteDto> findByCategory(@PathVariable Integer category_id) {
+        return medicationService.findByCategory(category_id);
+    }
+
     @GetMapping("/{id}")
-    public Medication findById(@PathVariable Integer id) {
+    public MedicationDto findById(@PathVariable Integer id) {
         return medicationService.findById(id);
     }
 

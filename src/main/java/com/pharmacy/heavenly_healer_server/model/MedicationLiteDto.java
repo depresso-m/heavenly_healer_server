@@ -9,5 +9,6 @@ public class MedicationLiteDto {
     private Integer id;
     private String name;
     private float price;
+    private Integer categoryId;
     private String imagePath;
 }
