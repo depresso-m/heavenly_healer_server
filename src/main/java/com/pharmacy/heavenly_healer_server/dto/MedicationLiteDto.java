@@ -1,4 +1,4 @@
-package com.pharmacy.heavenly_healer_server.model;
+package com.pharmacy.heavenly_healer_server.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,8 +1,8 @@
 package com.pharmacy.heavenly_healer_server.controller;
 
 import com.pharmacy.heavenly_healer_server.model.Medication;
-import com.pharmacy.heavenly_healer_server.model.MedicationDto;
-import com.pharmacy.heavenly_healer_server.model.MedicationLiteDto;
+import com.pharmacy.heavenly_healer_server.dto.MedicationDto;
+import com.pharmacy.heavenly_healer_server.dto.MedicationLiteDto;
 import com.pharmacy.heavenly_healer_server.service.MedicationService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;

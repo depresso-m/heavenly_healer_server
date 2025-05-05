@@ -1,8 +1,11 @@
-package com.pharmacy.heavenly_healer_server.model;
+package com.pharmacy.heavenly_healer_server.dto;
 
+import com.pharmacy.heavenly_healer_server.model.Medication;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+// Класс для объекта передачи данных Medication. Создан чтобы не передавать лишние данные (полный объект Category)
 
 @Data
 @AllArgsConstructor

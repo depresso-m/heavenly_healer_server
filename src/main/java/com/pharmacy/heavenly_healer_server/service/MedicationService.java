@@ -1,8 +1,8 @@
 package com.pharmacy.heavenly_healer_server.service;
 
 import com.pharmacy.heavenly_healer_server.model.Medication;
-import com.pharmacy.heavenly_healer_server.model.MedicationDto;
-import com.pharmacy.heavenly_healer_server.model.MedicationLiteDto;
+import com.pharmacy.heavenly_healer_server.dto.MedicationDto;
+import com.pharmacy.heavenly_healer_server.dto.MedicationLiteDto;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,4 +21,5 @@ public interface MedicationService {
     void saveMedicationWithImage(Medication medication, MultipartFile image) throws Exception; // Сохранение с картинкой
     MedicationDto findById(Integer id);
     List<MedicationLiteDto> findByCategory(Integer category_id);
+    Medication findMedicationEntityById(Integer id);
 }

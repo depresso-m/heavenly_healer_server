@@ -1,8 +1,8 @@
 package com.pharmacy.heavenly_healer_server.service.impl;
 
 import com.pharmacy.heavenly_healer_server.model.Medication;
-import com.pharmacy.heavenly_healer_server.model.MedicationDto;
-import com.pharmacy.heavenly_healer_server.model.MedicationLiteDto;
+import com.pharmacy.heavenly_healer_server.dto.MedicationDto;
+import com.pharmacy.heavenly_healer_server.dto.MedicationLiteDto;
 import com.pharmacy.heavenly_healer_server.repository.MedicationRepository;
 import com.pharmacy.heavenly_healer_server.service.MedicationService;
 import jakarta.transaction.Transactional;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,6 +58,12 @@ public class MedicationServiceImpl implements MedicationService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Medication not found with id: " + id));
 
         return MedicationDto.mapToDto(medication);
+    }
+
+    // Используется другими сервисами
+    public Medication findMedicationEntityById(Integer id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Medication not found with id: " + id));
     }
 
     @Override
