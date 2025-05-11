@@ -1,9 +1,8 @@
 package com.pharmacy.heavenly_healer_server.service;
 
-import com.pharmacy.heavenly_healer_server.config.MyUserDetails;
+import com.pharmacy.heavenly_healer_server.util.MyUserDetails;
 import com.pharmacy.heavenly_healer_server.model.User;
 import com.pharmacy.heavenly_healer_server.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,13 +14,16 @@ import java.util.Optional;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public MyUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findByEmail(email); // Так как у меня авторизация по email, надо возвращать email
         return user.map(MyUserDetails::new)
-                .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException(email + " not found"));
     }
 }

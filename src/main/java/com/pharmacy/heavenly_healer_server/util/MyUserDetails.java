@@ -1,4 +1,4 @@
-package com.pharmacy.heavenly_healer_server.config;
+package com.pharmacy.heavenly_healer_server.util;
 
 import com.pharmacy.heavenly_healer_server.model.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class MyUserDetails implements UserDetails {
-    private User user;
+    private final User user;
 
     public MyUserDetails(User user) {
         this.user = user;
@@ -48,8 +48,13 @@ public class MyUserDetails implements UserDetails {
         return user.getPassword();
     }
 
+    // Так как у меня авторизация по email, надо возвращать email
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmail();
+    }
+
+    public Integer getId() {
+        return user.getId();
     }
 }

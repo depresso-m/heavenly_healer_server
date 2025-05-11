@@ -1,7 +1,10 @@
 package com.pharmacy.heavenly_healer_server.controller;
 
+import com.pharmacy.heavenly_healer_server.util.MyUserDetails;
 import com.pharmacy.heavenly_healer_server.dto.CartItemDto;
 import com.pharmacy.heavenly_healer_server.service.CartService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -31,6 +34,14 @@ public class CartController {
                           @RequestParam Integer quantity)
     {
         cartService.addToCart(userId, medicationId, quantity);
+    }
+
+    //todo проверить
+    @GetMapping("/items")
+    public List<CartItemDto> getUserCart1(HttpServletRequest request) {
+        Integer userId = ((MyUserDetails) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal()).getId();
+        return cartService.getUserCart(userId);
     }
 
     @PutMapping("/{userId}/items/{cartItemId}")

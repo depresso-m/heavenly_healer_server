@@ -32,7 +32,6 @@ public class MedicationController {
     }
 
     @PostMapping(value = "/saveMedication", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<String> saveMedication(
             @RequestPart("medication") Medication medication,
             @RequestPart(value = "image", required = false) MultipartFile image) {
