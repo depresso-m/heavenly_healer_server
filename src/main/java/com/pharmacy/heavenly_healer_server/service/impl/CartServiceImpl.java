@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +29,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<CartItemDto> getUserCart(Integer userId) {
-    List<Cart> list = cartRepository.findByUserId(userId);
+        List<Cart> list = cartRepository.findByUserId(userId);
         return list.stream()
                 .map(cart -> new CartItemDto(
                         cart.getId(),
@@ -38,21 +39,32 @@ public class CartServiceImpl implements CartService {
                 .collect(Collectors.toList());
     }
 
-    @Override
+    @Transactional
     public void addToCart(Integer userId, Integer medicationId, Integer quantity) {
+        // Валидация
         if (userId == null || medicationId == null || quantity == null || quantity <= 0) {
             throw new IllegalArgumentException("User ID, medication ID, and quantity must be valid");
         }
 
-        Cart cart = new Cart();
-
+        // Получение пользователя
         User user = userService.getUserById(userId);
+
+        // Получение лекарства через репозиторий
         Medication medication = medicationService.findMedicationEntityById(medicationId);
 
-        cart.setUser(user);
-        cart.setMedication(medication);
-        cart.setQuantity(quantity);
-        cartRepository.save(cart);
+        // Логика корзины
+        Optional<Cart> existingCartItem = cartRepository.findByUserIdAndMedicationId(userId, medicationId);
+        if (existingCartItem.isPresent()) {
+            Cart cartItem = existingCartItem.get();
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
+            cartRepository.save(cartItem);
+        } else {
+            Cart newCartItem = new Cart();
+            newCartItem.setUser(user);
+            newCartItem.setMedication(medication);
+            newCartItem.setQuantity(quantity);
+            cartRepository.save(newCartItem);
+        }
     }
 
     @Override

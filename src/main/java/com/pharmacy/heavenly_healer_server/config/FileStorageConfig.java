@@ -1,4 +1,4 @@
-package com.pharmacy.heavenly_healer_server;
+package com.pharmacy.heavenly_healer_server.config;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
