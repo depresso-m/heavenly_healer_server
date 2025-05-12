@@ -42,7 +42,7 @@ public class UserService {
         userRepository.save(user);
 
         String token = jwtUtil.generateToken(user);
-        return new AuthResponse(token, user.getUsername());
+        return new AuthResponse(token, user.getUsername(), user.getId());
     }
 
     public AuthResponse authenticateUser(AuthRequest request) {
@@ -57,7 +57,7 @@ public class UserService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
         String token = jwtUtil.generateToken(user);
-        return new AuthResponse(token, user.getUsername());
+        return new AuthResponse(token, user.getUsername(), user.getId());
     }
 
     public User getUserById(Integer userId) {
