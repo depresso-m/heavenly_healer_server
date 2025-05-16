@@ -38,8 +38,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll() // разрешаем login/register
-                        .anyRequest().authenticated() // всё остальное требует токен
+                        .requestMatchers("/api/v1/auth/**",
+                                "/api/v1/medications/images/**").permitAll() // разрешаем login/register и картинки
+                        .anyRequest().authenticated()// всё остальное требует токен
                 )
                 .userDetailsService(myUserDetailsService)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthResponse {
-    private String token;
-    private String name;
-    private Integer userId;
-    private String role;
+public class OrderItemDto {
+    private Integer id;
+    private Integer medicationId;
+    private String medicationName;
+    private Integer quantity;
+    private float unitPrice;
 }

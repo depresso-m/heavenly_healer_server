@@ -38,7 +38,7 @@ public class CartController {
 
     //todo проверить
     @GetMapping("/items")
-    public List<CartItemDto> getUserCart1(HttpServletRequest request) {
+    public List<CartItemDto> getUserCart1() {
         Integer userId = ((MyUserDetails) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal()).getId();
         return cartService.getUserCart(userId);
