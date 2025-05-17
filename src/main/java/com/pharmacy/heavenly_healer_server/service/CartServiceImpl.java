@@ -1,13 +1,10 @@
-package com.pharmacy.heavenly_healer_server.service.impl;
+package com.pharmacy.heavenly_healer_server.service;
 
 import com.pharmacy.heavenly_healer_server.dto.CartItemDto;
 import com.pharmacy.heavenly_healer_server.model.Cart;
 import com.pharmacy.heavenly_healer_server.model.Medication;
 import com.pharmacy.heavenly_healer_server.model.User;
 import com.pharmacy.heavenly_healer_server.repository.CartRepository;
-import com.pharmacy.heavenly_healer_server.service.CartService;
-import com.pharmacy.heavenly_healer_server.service.MedicationService;
-import com.pharmacy.heavenly_healer_server.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 

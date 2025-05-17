@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**",
-                                "/api/v1/medications/images/**").permitAll() // разрешаем login/register и картинки
+                                "/api/v1/medications/images/**").permitAll() // разрешаем login/register и картинки 
                         .anyRequest().authenticated()// всё остальное требует токен
                 )
                 .userDetailsService(myUserDetailsService)
