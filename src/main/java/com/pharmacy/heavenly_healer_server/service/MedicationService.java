@@ -80,7 +80,7 @@ public class MedicationService {
         for (MedicationLiteDto medication : medications) {
             formatImagePath(medication);
         }
-        return repository.findAllByName(name);
+        return medications;
     }
 
     public MedicationDto findById(Integer id) {
